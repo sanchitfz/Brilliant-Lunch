@@ -6,7 +6,7 @@ Hi All, This is a brilliant Lunch page.
 Here based on the given input it will highlight the corresponding best matched output.
 
 To run this program,
-1)Download it
+1)Download Zip and extract it
 2)Run Lunch.html
 3)To give custom inputs and test-> open lunch.html -> 
 	goto line number 21 -> here "input" array is defined. -> You can give your custom inputs also for testing.
