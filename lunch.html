@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lunch</title>
+    <link rel="stylesheet" href="timetablejs.css">
+    <link rel="stylesheet" href="style.css">
+    <script src = "lunch.js"></script>
+</head>
+<body>
+    <h1 class="cent">Brilliant Lunch </h1>
+
+    <hr>
+    <div class="timetable"></div>
+
+    <script src = "timetable.js"></script>
+    <script>
+        
+        var input = [{ start: 225, end: 285 },
+                     { start: 210, end: 270 },
+                     { start: 180, end: 240 },
+                     { start: 240, end: 300 },
+                     { start: 300, end: 360 }, 
+                     { start: 270, end: 330 }
+                    ];
+
+        var names = ["Me"];
+        for(var i =1; i<input.length; i++){     
+            names.push("Brilliant Lunch" + i);     
+        }
+
+        var matchIndex = matchLunchEvent(input);
+        console.log("match",matchIndex,names);
+
+
+
+        //calender
+        var timetable = new Timetable();
+        timetable.setScope(9,3);
+        timetable.addLocations(names);
+        for(var i = 0; i < input.length; i++){
+            if(matchIndex == "No Match" && i == 0){
+                timetable.addEvent(
+                names[i], names[i] ,
+                new Date(2019,7,17, returnHour(input[i].start), returnMin(input[i].start) ) , 
+                new Date(2019,7,17, returnHour(input[i].end), returnMin(input[i].end) ),
+                { class: 'black-only'} );
+            }
+            else if( matchIndex !="No Match" && i == 0) {
+                timetable.addEvent(
+                names[i], names[i] ,
+                new Date(2019,7,17, returnHour(input[i].start), returnMin(input[i].start) ) , 
+                new Date(2019,7,17, returnHour(input[i].end), returnMin(input[i].end) ),
+                { class: 'green-only'} );
+            }
+            else if( i == matchIndex && matchIndex !="No Match") {
+                timetable.addEvent(
+                names[i], names[i] ,
+                new Date(2019,7,17, returnHour(input[i].start), returnMin(input[i].start) ) , 
+                new Date(2019,7,17, returnHour(input[i].end), returnMin(input[i].end) ),
+                { class: 'green-only'} );
+            }
+            else{
+                timetable.addEvent(
+                names[i], names[i] ,
+                new Date(2019,7,17, returnHour(input[i].start), returnMin(input[i].start) ) , 
+                new Date(2019,7,17, returnHour(input[i].end), returnMin(input[i].end) ),
+                );
+            }            
+        }
+
+        var renderer = new Timetable.Renderer(timetable);
+        renderer.draw('.timetable');
+    </script>
+    
+</body>
+</html>
